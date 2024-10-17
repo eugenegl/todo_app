@@ -5,7 +5,8 @@ def display_menu():
     print("1. Показать задачи")
     print("2. Добавить задачу")
     print("3. Удалить задачу")
-    print("4. Выход")
+    print("4. Редактировать задачу")  # Новая опция
+    print("5. Выход")
 
 def show_tasks(tasks):
     if not tasks:
@@ -33,6 +34,21 @@ def delete_task(tasks):
         except ValueError:
             print("Пожалуйста, введите корректный номер.")
 
+def edit_task(tasks):
+    show_tasks(tasks)
+    if tasks:
+        try:
+            idx = int(input("Введите номер задачи для редактирования: "))
+            if 1 <= idx <= len(tasks):
+                new_task = input("Введите новое описание задачи: ")
+                old_task = tasks[idx - 1]
+                tasks[idx - 1] = new_task
+                print(f"Задача '{old_task}' изменена на '{new_task}'.")
+            else:
+                print("Неверный номер задачи.")
+        except ValueError:
+            print("Пожалуйста, введите корректный номер.")
+
 def main():
     tasks = []
     while True:
@@ -45,6 +61,8 @@ def main():
         elif choice == '3':
             delete_task(tasks)
         elif choice == '4':
+            edit_task(tasks)  # Обработка новой опции
+        elif choice == '5':
             print("Выход из программы.")
             break
         else:
